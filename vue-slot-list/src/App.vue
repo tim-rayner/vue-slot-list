@@ -1,5 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import FancyList from "@/components/FancyList.vue";
+</script>
 
-<template>vue-slot-list</template>
-
-<style scoped></style>
+<template>
+  <div class="">
+    <FancyList>
+      <template #item="{ body, username, likes }">
+        <div class="item">
+          <p>{{ body }}</p>
+          <p class="meta">by {{ username }} | {{ likes }} likes</p>
+        </div>
+      </template>
+    </FancyList>
+  </div>
+</template>
