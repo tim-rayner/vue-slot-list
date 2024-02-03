@@ -1,49 +1,37 @@
 <script setup lang="ts">
 import FancyList from "@/components/FancyList.vue";
-import { ref, watch, type Ref } from "vue";
-import DummyData from "@/assets/data.json";
+import SearchInput from "@/components/SearchInput.vue";
+import { ref, type Ref } from "vue";
 
-const dummyData: any = ref();
-
-const searchTerm: Ref<number | null> = ref(null);
 const activeIndex: Ref<number | null> = ref(null);
-
-setTimeout(() => {
-  dummyData.value = DummyData;
-}, 1250);
-
-watch(searchTerm, () => {
-  activeIndex.value = null;
-});
-
-const findItem = () => {
-  if (searchTerm.value) {
-    //scroll to the item
-    //scroll to above the item
-    const tempScroll = searchTerm.value - 1;
-    const item = document.getElementById(`item-${tempScroll}`);
-
-    if (item) {
-      activeIndex.value = searchTerm.value ? searchTerm.value - 1 : null;
-      item.scrollIntoView({ behavior: "smooth" });
-    }
-  }
-};
 </script>
 
 <template>
   <div class="">
-    <input type="number" v-model="searchTerm" />
-    <button class="btn" @click="findItem">Find</button>
-
+    <h1>Ticketmaster Rap Events</h1>
+    <SearchInput v-model="activeIndex" />
     <FancyList class="item" :activeIndex="activeIndex">
-      <template #item="{ body, username, likes }">
+      <template #item="{ name, date, venue, country, city }">
         <!-- content here-->
         <div class="item">
-          <p>{{ body }}</p>
-          <p class="meta">by {{ username }} | {{ likes }} likes</p>
+          <p>{{ name }}</p>
+          <p class="meta">
+            {{ date }} | {{ venue }} | {{ country }} - {{ city }}
+          </p>
         </div>
       </template>
     </FancyList>
   </div>
 </template>
+
+<style scoped>
+h1 {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.meta {
+  font-size: 0.8rem;
+  color: #666;
+}
+</style>
