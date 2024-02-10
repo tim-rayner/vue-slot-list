@@ -59,7 +59,10 @@ const getEvents = async () => {
 </script>
 
 <template>
-  <ul style="margin-top: 1rem" v-if="eventData">
+  <ul
+    style="margin-top: 1rem; max-height: 90vh; overflow-y: scroll"
+    v-if="eventData"
+  >
     <li
       v-for="(event, index) in eventData"
       :key="event.id"
@@ -81,6 +84,7 @@ ul li {
   margin: 10px;
   background: #fff;
   border: solid 1px #ddd;
+  cursor: pointer;
 }
 
 .active {

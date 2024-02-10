@@ -26,7 +26,7 @@ const findItem = () => {
 <template>
   <div class="wrapper">
     <p style="padding-right: 0.5em">Scroll to list index:</p>
-    <input type="number" v-model="searchTerm" />
+    <input type="number" max="50" min="0" v-model="searchTerm" />
     <button class="btn" @click="findItem">scroll</button>
   </div>
 </template>
